@@ -30,6 +30,29 @@ class Server(Resource):
         return output_dict
         #print(data,file=sys.stderr)
 
+#api.route('/homes')
+class homes(Resource):
+    def get(self):
+        iter =0
+        count = 0
+        number = request.args.get('number')
+        zipCode = request.args.get('zipcode')
+        #print(zipCode)
+        #print(number)
+        output_dict = {}
+        with open('bigdump2.json') as data_file:
+            data = json.load(data_file)
+        while count <= int(number):
+            #print("Iter: "+str(iter))
+            #print(data[iter][0]["address"]["postal_code"]["value"])
+            if data[iter][0]["address"]["postal_code"]["value"] == zipCode:
+                output_dict[count] = data[iter][0]
+                count+=1
+            iter+=1
+        return output_dict
+                #print(data,file=sys.stderr)
+api.add_resource(homes, '/homes')
+
 def generate_matches():
     output_dict = {}
     with open('bigdump2.json') as data_file:
