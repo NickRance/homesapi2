@@ -35,7 +35,7 @@ def generate_matches():
         data = json.load(data_file)
     # for iter in range(0,int(number)):
    # print(data[0])
-    for iter in range(0, 10):
+    for iter in range(0, 5):
         output_dict[iter] = getMatchFields(data[iter][0])
     return output_dict
 
@@ -49,7 +49,7 @@ def getMatchFields(listing):
     clean_record["street_address"] = listing["address"]["street_address"]["label"]
     clean_record["postal_code"] = listing["address"]["postal_code"]["value"]
     clean_record["state"] = listing["address"]["region"]["label"]
-    clean_record["main_uri"] = listing["main_uri"]
+    clean_record["main_uri"] = "http://homes.com" + listing["main_uri"]
     clean_record["price"] = listing["price"]["value"]
     clean_record["primary_image "] = listing["primary_image"]["src"]
     return clean_record
