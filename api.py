@@ -25,8 +25,12 @@ api.route = types.MethodType(api_route, api)
 @api.route('/matches')
 class Server(Resource):
     def get(self):
-        output_dict = generate_matches()
-        #number = request.args.get('number')
+        if  request.args.get('number'):
+            number = int(request.args.get('number'))
+        else:
+            number = 5
+        output_dict = generate_matches(number)
+
         return output_dict
         #print(data,file=sys.stderr)
 
@@ -55,13 +59,13 @@ class homes(Resource):
                 #print(data,file=sys.stderr)
 api.add_resource(homes, '/homes')
 
-def generate_matches():
+def generate_matches(number):
     output_dict = {}
     with open('bigdump2.json') as data_file:
         data = json.load(data_file)
     # for iter in range(0,int(number)):
    # print(data[0])
-    for iter in range(0, 5):
+    for iter in range(0, number):
         output_dict[iter] = getMatchFields(data[iter][0])
     return output_dict
 
