@@ -52,9 +52,11 @@ def getMatchFields(listing):
     clean_record["main_uri"] = "http://homes.com" + listing["main_uri"]
     clean_record["price"] = listing["price"]["value"]
     clean_record["primary_image "] = listing["primary_image"]["src"]
+    clean_record["crime_url"] = getCrimeUrl(listing["address"]["postal_code"]["value"])
     return clean_record
 #api.add_resource(Server, '/')
-
+def getCrimeUrl(zipcode):
+    return ("http://www.mylocalcrime.com/#"+zipcode)
 if __name__ == '__main__':
     app.run(debug=True, host = os.getenv("IP","0.0.0.0"),port = int (os.getenv('PORT', 33507)))
     #app.run()
