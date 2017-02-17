@@ -6,6 +6,7 @@ from flask_restful import Resource, Api, request
 import json
 import os
 import types
+import requests
 import sys
 
 
@@ -54,10 +55,31 @@ def getMatchFields(listing):
     clean_record["price"] = listing["price"]["value"]
     clean_record["primary_image "] = listing["primary_image"]["src"]
     clean_record["crime_url"] = getCrimeUrl(listing["address"]["postal_code"]["value"])
+    clean_record["food_score"] = getYelpRestaurants(listing["address"]["postal_code"]["value"])
+    clean_record["restaurant_search_url"] = "https://www.yelp.com/search?find_desc=Restaurants&find_loc="+listing["address"]["postal_code"]["value"]
     return clean_record
 #api.add_resource(Server, '/')
 def getCrimeUrl(zipcode):
     return ("http://www.mylocalcrime.com/#"+zipcode)
+
+def getYelpRestaurants(zipcode):
+    url = "https://api.yelp.com/v3/businesses/search"
+
+    querystring = {"term": "restaurants", "location": zipcode, "sort_by": "rating"}
+
+    headers = {
+        'authorization': "Bearer kqvOVDOQeslDhIResy4ITpm1koTAGKnzQTOgQE80hYk-cIxKc9_g4sZSAY4e5VhUnVZlg9UZU8p7nTw3fKNpsW49cucrvvki-M8VEg1Uz_J-Fjg-bda49n8HOKumWHYx",
+        'cache-control': "no-cache",
+        'postman-token': "08286f44-b75a-b265-e966-40e016de51bd"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring).json()
+    #print(response)
+    sum=0
+    for business in response["businesses"]:
+        sum += business['rating']
+    return (sum/len(response["businesses"]))
+
 if __name__ == '__main__':
     app.run(debug=True, host = os.getenv("IP","0.0.0.0"),port = int (os.getenv('PORT', 33507)))
     #app.run()
