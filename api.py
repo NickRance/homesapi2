@@ -11,6 +11,7 @@ import sys
 app = Flask(__name__)
 api = Api(app)
 
+@api.route('/matches')
 class Server(Resource):
     def get(self):
         output_dict = {}
