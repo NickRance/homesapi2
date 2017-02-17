@@ -48,6 +48,7 @@ def getMatchFields(listing):
     clean_record = {}
     clean_record["street_address"] = listing["address"]["street_address"]["label"]
     clean_record["postal_code"] = listing["address"]["postal_code"]["value"]
+    clean_record["city"] = listing["address"]["locality"]["label"]
     clean_record["state"] = listing["address"]["region"]["label"]
     clean_record["main_uri"] = "http://homes.com" + listing["main_uri"]
     clean_record["price"] = listing["price"]["value"]
