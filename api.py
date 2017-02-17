@@ -47,8 +47,8 @@ class homes(Resource):
             #print(data[iter][0]["address"]["postal_code"]["value"])
             if data[iter][0]["address"]["postal_code"]["value"] == zipCode:
                 output_dict[count] = data[iter][0]
-                count+=1
                 output_dict[count]["food_score"] = getYelpRestaurants(data[iter][0]["address"]["postal_code"]["value"])
+                count+=1
             iter+=1
 
         return output_dict
