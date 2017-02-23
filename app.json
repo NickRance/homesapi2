@@ -3,5 +3,6 @@
   "description": "Simple API Deployed on Heroku",
   "repository": "https://github.com/NickRance/homesapi2",
   "logo": "https://raw.githubusercontent.com/NickRance/homesapi2/master/images/homes.jpg",
-  "keywords": ["python", "api"]
+  "keywords": ["python", "api"],
+   "image": "heroku/python"
 }
