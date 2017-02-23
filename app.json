@@ -2,6 +2,6 @@
 {"name": "Homes API",
   "description": "Simple API Deployed on Heroku",
   "repository": "https://github.com/NickRance/homesapi2",
-  "logo": "https://github.com/NickRance/homesapi2/blob/master/images/homes.jpg",
+  "logo": "https://raw.githubusercontent.com/NickRance/homesapi2/master/images/homes.jpg",
   "keywords": ["python", "api"]
 }
